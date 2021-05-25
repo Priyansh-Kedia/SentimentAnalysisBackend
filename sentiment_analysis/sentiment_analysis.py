@@ -41,6 +41,8 @@ def retrain_model(review):
     XTrain = tokenizer.texts_to_matrix(docs, mode='freq')
     ytrain = review.prediction
 
+    model = keras.models.load_model(MODEL_NAME)
+
     model.fit(XTrain, ytrain, epochs=50, verbose=2)
 
     model.save(MODEL_NAME)
