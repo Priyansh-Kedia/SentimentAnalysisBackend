@@ -1,11 +1,14 @@
-# FastApi will be used to make the apis, 
-# refer to https://fastapi.tiangolo.com/ to read about the same
-from fastapi import FastAPI
+from fastapi import FastAPI, Body
+from pydantic import BaseModel
+
+class Review(BaseModel):
+    review: str
+    is_positive: bool
+    correct_prediction: bool
+
 app = FastAPI()
 
-@app.get("/")
-def test_endpoint(review: str, is_positive: int,check_prediction: bool ):
-    print("Review :",review,"\n")
-    print("Review :",is_positive,"\n")
-    print("Review :",check_prediction,"\n")
-    return 1
+@app.post("/add_review/")
+def add_review(review: Review = Body(...)):
+    print("Review is ", review.review)
+    return review

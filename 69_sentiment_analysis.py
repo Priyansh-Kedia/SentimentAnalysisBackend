@@ -177,6 +177,9 @@ model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 # fit network
 model.fit(XTrain, ytrain, epochs=50, verbose=2)
+
+model.save("sentiment_model")
+
 # evaluate
 loss, acc = model.evaluate(Xtest, ytest, verbose=0)
 print('Test Accuracy: %f' % (acc*100))
