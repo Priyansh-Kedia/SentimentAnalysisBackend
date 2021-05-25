@@ -1,0 +1,1 @@
+MODEL_NAME = "sentiment_model"

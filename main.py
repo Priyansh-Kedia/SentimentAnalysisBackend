@@ -1,10 +1,6 @@
 from fastapi import FastAPI, Body
-from pydantic import BaseModel
 
-class Review(BaseModel):
-    review: str
-    is_positive: bool
-    correct_prediction: bool
+from sentiment_analysis.models import *
 
 app = FastAPI()
 
