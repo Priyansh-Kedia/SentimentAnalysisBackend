@@ -157,7 +157,7 @@ positive_lines = process_docs('txt_sentoken/pos', vocab, False)
 negative_lines = process_docs('txt_sentoken/neg', vocab, False)
 docs = negative_lines + positive_lines
 
-# encode training data set
+# encode test data set
 Xtest = tokenizer.texts_to_matrix(docs, mode='freq')
 ytest = array([0 for _ in range(100)] + [1 for _ in range(100)])
 print(Xtest.shape)
@@ -180,7 +180,6 @@ model.fit(XTrain, ytrain, epochs=50, verbose=2)
 # evaluate
 loss, acc = model.evaluate(Xtest, ytest, verbose=0)
 print('Test Accuracy: %f' % (acc*100))
-
 
 def predict_sentiment(review, vocab, tokenizer, model):
     # clean
