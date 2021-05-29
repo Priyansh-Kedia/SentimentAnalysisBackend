@@ -1,3 +1,5 @@
+#import nltk
+#nltk.download('stopwords')
 from nltk.corpus import stopwords
 
 import string
@@ -70,8 +72,10 @@ min_occurane = 2
 tokens = [k for k,c in vocab.items() if c >= min_occurane]
 print(len(tokens))
 
-save_list(tokens, "vocab.txt")
-
+#create new file vocab.txt and save vocab in it
+vocab_filename='sentiment_analysis/vocab.txt'
+open(vocab_filename,'w').close()
+save_list(tokens, vocab_filename)
 
 def doc_to_line(filename, vocab):
     # load the doc 
@@ -98,7 +102,7 @@ def docs_to_lines(directory, vocab):
     return lines
 
 # load the vocabulary
-vocab_filename = 'vocab.txt'
+vocab_filename = 'sentiment_analysis/vocab.txt'
 vocab = load_doc(vocab_filename)
 vocab = vocab.split()
 vocab = set(vocab)
@@ -134,6 +138,11 @@ tokenizer = Tokenizer()
 # fit the tokenizer on the values
 docs = negative_lines + positive_lines
 tokenizer.fit_on_texts(docs)
+
+#save tokenizer
+import pickle
+with open('tokenizer.pickle', 'wb') as handle:
+    pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 # encode the training data set
 # mode: one of "binary", "count", "tfidf", "freq".
@@ -180,6 +189,9 @@ model.fit(XTrain, ytrain, epochs=50, verbose=2)
 # evaluate
 loss, acc = model.evaluate(Xtest, ytest, verbose=0)
 print('Test Accuracy: %f' % (acc*100))
+
+# save model
+model.save("sentiment_analysis")
 
 def predict_sentiment(review, vocab, tokenizer, model):
     # clean
