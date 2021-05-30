@@ -8,8 +8,7 @@ from keras.preprocessing.text import Tokenizer
 from keras import models
 from numpy import array
 
-
-from sentiment_analysis.constants import MODEL_NAME
+from sentiment_analysis.constants import *
 
 from keras.models import *
 
@@ -60,7 +59,13 @@ def retrain_model(review):
     # print(XTrain, ytrain)
     model = models.load_model(MODEL_NAME)
 
-    # predict_sentiment(review.review, tokenizer, model)
+    #load tokeninzer
+    import pickle
+    with open(TOKENIZER_NAME, 'rb') as handle:
+        tokenizer = pickle.load(handle)
+    
+    return predict_sentiment(review.review, tokenizer, model)
+
     # model.fit(XTrain, ytrain, epochs=50, verbose=2)
 
     # model.save(MODEL_NAME)
