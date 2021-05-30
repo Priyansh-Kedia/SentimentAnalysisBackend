@@ -12,6 +12,23 @@ from sentiment_analysis.constants import *
 
 from keras.models import *
 
+import pickle
+
+# load model
+def load_model(model_name):
+    return models.load_model(model_name)
+
+# load model
+def load_tokenizer(tokenizer_name):
+    with open(tokenizer_name, 'rb') as handle:
+        tokenizer = pickle.load(handle)
+    return tokenizer
+
+# load model
+def load_vocab(vocab_name):
+    file_object = open(vocab_name, 'r')
+    return file_object.read()
+
 # Convert doc to token
 def clean_doc(doc):
     # Splits the words by space
@@ -47,7 +64,7 @@ def predict_sentiment(review, tokenizer, model):
 
 def retrain_model(review):
     # create the tokenizer
-    tokenizer = Tokenizer()
+    # tokenizer = Tokenizer()
     # fit the tokenizer on the values
     # docs = clean_doc(review.review)
 
@@ -57,14 +74,14 @@ def retrain_model(review):
     # ytrain = [review.prediction]
 
     # print(XTrain, ytrain)
-    model = models.load_model(MODEL_NAME)
 
-    #load tokeninzer
-    import pickle
-    with open(TOKENIZER_NAME, 'rb') as handle:
-        tokenizer = pickle.load(handle)
+    model = load_model(MODEL_NAME)
+
+    tokenizer = load_tokenizer(TOKENIZER_NAME)
+
+    vocab = load_vocab(VOCAB_NAME)
     
-    return predict_sentiment(review.review, tokenizer, model)
+    predict_sentiment(review.review, tokenizer, model)
 
     # model.fit(XTrain, ytrain, epochs=50, verbose=2)
 

@@ -8,5 +8,5 @@ app = FastAPI()
 @app.post("/add_review/")
 async def add_review(review: Review = Body(...)):
     # add code to save tokenizer
-    return retrain_model(review)
-    #return review
+    retrain_model(review)
+    return review
