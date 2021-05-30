@@ -1,1 +1,1 @@
-MODEL_NAME = "sentiment_model"
+MODEL_NAME = "sentiment_analysis"

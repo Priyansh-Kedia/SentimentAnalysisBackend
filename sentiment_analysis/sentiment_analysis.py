@@ -9,9 +9,9 @@ from keras import models
 from numpy import array
 
 
-from .constants import MODEL_NAME
+from sentiment_analysis.constants import MODEL_NAME
 
-from .models import *
+from keras.models import *
 
 # Convert doc to token
 def clean_doc(doc):
@@ -60,11 +60,8 @@ def retrain_model(review):
     # print(XTrain, ytrain)
     model = models.load_model(MODEL_NAME)
 
-    predict_sentiment(review.review, tokenizer, model)
+    # predict_sentiment(review.review, tokenizer, model)
     # model.fit(XTrain, ytrain, epochs=50, verbose=2)
 
     # model.save(MODEL_NAME)
     
-
-if __name__ == "__main__":
-    retrain_model(Review("good",1))

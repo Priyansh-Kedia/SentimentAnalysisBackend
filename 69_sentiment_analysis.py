@@ -191,7 +191,8 @@ loss, acc = model.evaluate(Xtest, ytest, verbose=0)
 print('Test Accuracy: %f' % (acc*100))
 
 # save model
-model.save("sentiment_analysis")
+from sentiment_analysis.constants import MODEL_NAME
+model.save(MODEL_NAME)
 
 def predict_sentiment(review, vocab, tokenizer, model):
     # clean
