@@ -65,3 +65,6 @@ def retrain_model(review):
 
     # model.save(MODEL_NAME)
     
+
+if __name__ == "__main__":
+    retrain_model(Review("good",1))
