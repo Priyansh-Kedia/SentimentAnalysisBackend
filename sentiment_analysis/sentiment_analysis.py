@@ -48,6 +48,15 @@ def clean_doc(doc):
     tokens = [word for word in tokens if len(word) > 1]
     return tokens
 
+def extract_XTrain(review,vocab,tokenizer):
+    tokens = clean_doc(review.review)
+    tokens = [w for w in tokens if w in vocab]
+    line = ' '.join(tokens)
+    return tokenizer.texts_to_matrix([line],mode = 'freq')
+
+def extract_ytrain(review):
+    return array([review.prediction])
+
 def predict_sentiment(review, tokenizer, model):
     # clean
     tokens = clean_doc(review)
@@ -81,9 +90,10 @@ def retrain_model(review):
 
     vocab = load_vocab(VOCAB_NAME)
     
-    predict_sentiment(review.review, tokenizer, model)
-
-    # model.fit(XTrain, ytrain, epochs=50, verbose=2)
+    # predict_sentiment(review.review, tokenizer, model)
+    XTrain = extract_XTrain(review,vocab,tokenizer)
+    ytrain = extract_ytrain(review)
+    model.fit(XTrain, ytrain, epochs=50, verbose=2)
 
     # model.save(MODEL_NAME)
     
