@@ -176,7 +176,7 @@ print(Xtest.shape)
 
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
-"""
+
 n_words = Xtest.shape[1]
 # define network
 model = Sequential()
@@ -193,7 +193,7 @@ print('Test Accuracy: %f' % (acc*100))
 # save model
 from sentiment_analysis.constants import MODEL_NAME
 model.save(MODEL_NAME)
-"""
+
 def predict_sentiment(review, vocab, tokenizer, model):
     # clean
     tokens = clean_doc(review)
