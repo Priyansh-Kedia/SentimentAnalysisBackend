@@ -1,5 +1,6 @@
 #import nltk
 #nltk.download('stopwords')
+from sentiment_analysis.constants import MODEL_NAME
 from nltk.corpus import stopwords
 
 import string
@@ -8,6 +9,8 @@ from collections import Counter
 
 from keras.preprocessing.text import Tokenizer
 from numpy import array
+
+import tensorflow as tf
 
 def load_doc(filename):
     file = open(filename,"r")
@@ -183,7 +186,7 @@ model = Sequential()
 model.add(Dense(50, input_shape=(n_words,), activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 # compile network
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+# model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 # fit network
 model.fit(XTrain, ytrain, epochs=50, verbose=2)
 # evaluate
@@ -191,8 +194,8 @@ loss, acc = model.evaluate(Xtest, ytest, verbose=0)
 print('Test Accuracy: %f' % (acc*100))
 
 # save model
-from sentiment_analysis.constants import MODEL_NAME
-model.save(MODEL_NAME)
+# from sentiment_analysis.constants import MODEL_NAME
+# model.save(MODEL_NAME)
 
 def predict_sentiment(review, vocab, tokenizer, model):
     # clean

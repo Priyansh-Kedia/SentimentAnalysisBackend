@@ -1,3 +1,4 @@
+from firebase_admin.ml import update_model
 from nltk.corpus import stopwords
 
 import string
@@ -13,6 +14,8 @@ from sentiment_analysis.constants import *
 from keras.models import *
 
 import pickle
+
+from .firebase_upload import *
 
 # load model
 def load_model(model_name):
@@ -48,14 +51,24 @@ def clean_doc(doc):
     tokens = [word for word in tokens if len(word) > 1]
     return tokens
 
-def extract_XTrain(review,vocab,tokenizer):
-    tokens = clean_doc(review.review)
+def valid_tokens(tokens,vocab):
+    # filter by vocab
     tokens = [w for w in tokens if w in vocab]
+    # convert list to string
     line = ' '.join(tokens)
-    return tokenizer.texts_to_matrix([line],mode = 'freq')
+    return line
 
-def extract_ytrain(review):
-    return array([review.prediction])
+def prepare_data(review,vocab,tokenizer):
+    # clean
+    tokens = clean_doc(review.review)
+    # filter by vocab
+    line = valid_tokens(tokens,vocab)
+    # convert to matrix
+    XTrain = tokenizer.texts_to_matrix([line],mode='freq')
+    #convert to array
+    ytrain = array([review.prediction])
+
+    return XTrain,ytrain
 
 def predict_sentiment(review, tokenizer, model):
     # clean
@@ -91,9 +104,13 @@ def retrain_model(review):
     vocab = load_vocab(VOCAB_NAME)
     
     # predict_sentiment(review.review, tokenizer, model)
-    XTrain = extract_XTrain(review,vocab,tokenizer)
-    ytrain = extract_ytrain(review)
+    
+    # extract XTrain and ytrain
+    XTrain,ytrain = prepare_data(review,vocab,tokenizer)
+    
     model.fit(XTrain, ytrain, epochs=50, verbose=2)
+    
+    firebase_upload = FirebaseUpload()
+    firebase_upload.upload_model(model)
 
     # model.save(MODEL_NAME)
-    
