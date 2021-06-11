@@ -109,6 +109,9 @@ def retrain_model(review):
     XTrain,ytrain = prepare_data(review,vocab,tokenizer)
     
     model.fit(XTrain, ytrain, epochs=50, verbose=2)
-
+    
+    # update saved model
+    model.save(MODEL_NAME)
+    
     firebase_upload = FirebaseUpload()
     firebase_upload.upload_model(model)
