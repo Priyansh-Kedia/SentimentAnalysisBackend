@@ -112,4 +112,3 @@ def retrain_model(review):
 
     firebase_upload = FirebaseUpload()
     firebase_upload.upload_model(model)
-

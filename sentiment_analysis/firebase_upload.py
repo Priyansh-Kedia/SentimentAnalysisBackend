@@ -4,6 +4,7 @@ from firebase_admin import ml
 from firebase_admin import credentials
 from utils import *
 from .constants import *
+import os
 
 import tensorflow as tf
 
@@ -48,4 +49,4 @@ class FirebaseUpload():
         
         new_model = self.prepare_model(tflite_format)
         ml.publish_model(new_model.model_id)
-    
+        os.remove('firebase_ml_model.tflite')
