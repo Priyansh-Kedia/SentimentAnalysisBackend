@@ -10,14 +10,10 @@ app = FastAPI()
 
 @app.post("/add_review/")
 async def add_review(review: Review = Body(...)):
-    # add code to save tokenizer
     retrain_model(review)
     return review
 
 @app.get("/get_review/{review}")
 async def get_review(review: str):
     prediction = get_sentiment(review)
-    if(prediction==1):
-        return 'Positive Review'
-    else:
-        return 'Negative Review'
+    return "Positive Review" if prediction == 1 else "Negative Review"
