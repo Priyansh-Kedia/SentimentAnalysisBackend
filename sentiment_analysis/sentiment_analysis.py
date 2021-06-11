@@ -1,4 +1,5 @@
 from firebase_admin.ml import update_model
+from nltk import tokenize
 from nltk.corpus import stopwords
 
 import string
@@ -8,6 +9,7 @@ from collections import Counter
 from keras.preprocessing.text import Tokenizer
 from keras import models
 from numpy import array
+from pydantic.main import prepare_config
 
 from sentiment_analysis.constants import *
 
@@ -83,6 +85,12 @@ def predict_sentiment(review, tokenizer, model):
     # prediction
     yhat = model.predict(encoded, verbose=0)
     return round(yhat[0,0])
+
+def get_sentiment(review):
+    model = load_model(MODEL_NAME)
+    tokenizer = load_tokenizer(TOKENIZER_NAME)
+    sentiment = predict_sentiment(review,tokenizer,model)
+    return sentiment
 
 def retrain_model(review):
     # create the tokenizer
