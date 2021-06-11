@@ -2,17 +2,26 @@ from pickle import NONE
 import firebase_admin
 from firebase_admin import ml
 from firebase_admin import credentials
+from utils import *
 from .constants import *
 
 import tensorflow as tf
 
 class FirebaseUpload():
     def __init__(self):
-        self.app = firebase_admin.initialize_app(
-        credentials.Certificate('sentiment_analysis/sentimentalanalysis-6350d-firebase-adminsdk-fufv0-a737778f8b.json'),
-        options={
-            'storageBucket': 'sentimentalanalysis-6350d.appspot.com',
-        })
+        self.app = self.init()
+
+    def init(self):
+        app = None
+        try:     
+            app = firebase_admin.get_app()
+        except:
+            app = firebase_admin.initialize_app(
+            credentials.Certificate(Util.get_config(KEY)),   
+            options={
+                'storageBucket': Util.get_config(STORAGE_BUCKET)
+            })
+        return app
 
     def prepare_model(self, tflite_format):
         new_model = None
@@ -27,7 +36,7 @@ class FirebaseUpload():
             new_model = ml.create_model(model)
 
         else:
-            model = ml.get_model(models_list[0].model_id)
+            model = ml.get_model(models_list.models[0].model_id)
             model.model_format = tflite_format
             new_model = ml.update_model(model)
 
@@ -39,3 +48,4 @@ class FirebaseUpload():
         
         new_model = self.prepare_model(tflite_format)
         ml.publish_model(new_model.model_id)
+    

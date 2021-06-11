@@ -1,4 +1,6 @@
+from sentiment_analysis.constants import STORAGE_BUCKET
 from fastapi import FastAPI, Body
+from utils import *
 
 from sentiment_analysis.models import *
 from sentiment_analysis.sentiment_analysis import predict_sentiment, retrain_model
