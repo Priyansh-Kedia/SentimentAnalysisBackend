@@ -11,22 +11,27 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
+from pathlib import Path
+import os
+
+current_file = Path(__file__)
+current_file_dir = current_file.parent
+project_root = current_file_dir.parent
+project_root_absolute = project_root.resolve()
+print(project_root_absolute)
+static_root_absolute = os.path.join(project_root_absolute,"ContactUs")
 
 app = FastAPI()
-app.mount("/css", StaticFiles(directory="ContactUs/css"), name="static")
-app.mount("/js", StaticFiles(directory="ContactUs/js"), name="js")
-templates = Jinja2Templates(directory="ContactUs")
+app.mount("/css", StaticFiles(directory=os.path.join(static_root_absolute,"css")), name="static")
+app.mount("/js", StaticFiles(directory=os.path.join(static_root_absolute, "js")), name="js")
+templates = Jinja2Templates(directory=os.path.join(static_root_absolute))
+
 
 @app.get("/", response_class=HTMLResponse)
 async def get_prediction_page(request: Request):
     return templates.TemplateResponse("index.html", {"request":request})
 
-
-app.mount("/css", StaticFiles(directory="ContactUs/css"), name="static")
-app.mount("/js", StaticFiles(directory="ContactUs/js"), name="js")
-templates = Jinja2Templates(directory="ContactUs")
-
-@app.get("/retrain_form/{review}/{prediction}", response_class=HTMLResponse)
+@app.get("/retrain_form/{review}/{prediction}", response_class = HTMLResponse)
 async def get_prediction_page(request: Request, review: str, prediction: str):
     return templates.TemplateResponse("retrain.html", {"request":request, "review": review, "prediction": prediction})
 

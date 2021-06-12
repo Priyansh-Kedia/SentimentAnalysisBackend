@@ -50,7 +50,7 @@
 		               	}, 1000);
 						   $('#form-message-success').text(msg)
 						   
-						    window.open("/retrain_form/"+review+"/"+msg)
+						    window.open("/retrain_form/"+review+"/"+msg, '_self')
 				            setTimeout(function(){
 				               $('#form-message-success').fadeIn();   
 		               	}, 1400);

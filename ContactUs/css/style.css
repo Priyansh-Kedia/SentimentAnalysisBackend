@@ -1634,7 +1634,7 @@ pre {
     color: #6c757d;
     opacity: 1; }
   .form-control:disabled, .form-control[readonly] {
-    background-color: #e9ecef;
+    /* background-color: #e9ecef; */
     opacity: 1; }
 
 select.form-control:focus::-ms-value {
@@ -1730,7 +1730,20 @@ textarea.form-control {
   margin-top: 0.3rem;
   margin-left: -1.25rem; }
   .form-check-input:disabled ~ .form-check-label {
-    color: #6c757d; }
+    color: #6c757d; 
+  }
+
+.form-check-input:disabled {
+  position: absolute;
+  margin-top: 0.3rem;
+  margin-left: -1.25rem; 
+}
+
+input.disabled {
+  position: absolute;
+  margin-top: 0.3rem;
+  margin-left: -1.25rem; 
+}
 
 .form-check-label {
   margin-bottom: 0; }
@@ -3140,7 +3153,8 @@ input[type="button"].btn-block {
     background-image: none; }
   .custom-select:disabled {
     color: #6c757d;
-    background-color: #e9ecef; }
+    background-color: #e9ecef; 
+  }
   .custom-select::-ms-expand {
     display: none; }
 

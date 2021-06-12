@@ -34,12 +34,13 @@
 						waitText = 'Submitting...';
 
 					let url = "/add_review/"
+					console.log(url)
 					$.ajax({   	
 				      type: "POST",
 				      url: url,
 					  data: {
 						  'review' : document.getElementById("review").placeholder,
-						  'prediction': document.getElementById("prediction_actual").value
+						  'prediction': document.getElementById("prediction").value
 					  },
 				      beforeSend: function() { 
 				      	$submit.css('display', 'block').text(waitText);
