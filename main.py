@@ -1,7 +1,7 @@
 from os import name
 import string
 from sentiment_analysis.constants import STORAGE_BUCKET
-from fastapi import FastAPI, Body, Request
+from fastapi import FastAPI, Body, Request, BackgroundTasks
 from utils import *
 
 from sentiment_analysis.models import *
@@ -36,8 +36,8 @@ async def get_prediction_page(request: Request, review: str, prediction: str):
     return templates.TemplateResponse("retrain.html", {"request":request, "review": review, "prediction": prediction})
 
 @app.post("/add_review/")
-async def add_review(review: Review = Body(...)):
-    retrain_model(review)
+async def add_review(background_tasks: BackgroundTasks, review: Review = Body(...)):
+    background_tasks.add_task(retrain_model, review)
     return "Thank you for feedback, model retrained"
 
 @app.get("/get_review/{review}")
