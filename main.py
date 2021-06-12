@@ -1,5 +1,4 @@
 from os import name
-import string
 from sentiment_analysis.constants import STORAGE_BUCKET
 from fastapi import FastAPI, Body, Request, BackgroundTasks
 from utils import *
