@@ -21,10 +21,19 @@ templates = Jinja2Templates(directory="ContactUs")
 async def get_prediction_page(request: Request):
     return templates.TemplateResponse("index.html", {"request":request})
 
+
+app.mount("/css", StaticFiles(directory="ContactUs/css"), name="static")
+app.mount("/js", StaticFiles(directory="ContactUs/js"), name="js")
+templates = Jinja2Templates(directory="ContactUs")
+
+@app.get("/retrain_form/{review}/{prediction}", response_class=HTMLResponse)
+async def get_prediction_page(request: Request, review: str, prediction: str):
+    return templates.TemplateResponse("retrain.html", {"request":request, "review": review, "prediction": prediction})
+
 @app.post("/add_review/")
 async def add_review(review: Review = Body(...)):
     retrain_model(review)
-    return review
+    return "Thank you for feedback, model retrained"
 
 @app.get("/get_review/{review}")
 async def get_review(review: str):

@@ -31,24 +31,26 @@
 				      		<div id="form-message-success" class="mb-4">
 								Aditya
 				      		</div>
-									<form method="GET" id="contactForm" name="contactForm" class="contactForm">
+									<form method="POST" id="contactForm" name="contactForm" class="contactForm">
 										<div class="row">
-											<div class="col-md-12">
+											
+											<div class="col-md-12"> 
 												<div class="form-group">
-													<input type="text" class="form-control" name="review" id="review" placeholder="Review">
+													<input type="text" class="form-control" name="review" id="review" placeholder= "{{ review }}" disabled>
+													
 												</div>
 											</div>
-											<!-- <div class="col-md-12"> 
+											<div class="col-md-12">
 												<div class="form-group">
-													<input type="email" class="form-control" name="email" id="email" placeholder="Email">
+													<input type="text" class="form-control" name="prediction" id="prediction" placeholder="{{ prediction }}" disabled>
 												</div>
-											</div> -->
+											</div>
+											<div class="col-md-12">
+												<div class="form-group">
+													<input type="number" class="form-control" name="prediction_actual" id="prediction_actual" placeholder="Enter 1 for positive review and 0 for negative">
+												</div>
+											</div>
 											<!-- <div class="col-md-12">
-												<div class="form-group">
-													<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject">
-												</div>
-											</div>
-											<div class="col-md-12">
 												<div class="form-group">
 													<textarea name="message" class="form-control" id="message" cols="30" rows="6" placeholder="Message"></textarea>
 												</div>
@@ -112,7 +114,7 @@
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery.validate.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/retrain_main.js"></script>
 
 	</body>
 </html>

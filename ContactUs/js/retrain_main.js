@@ -33,13 +33,14 @@
 					var $submit = $('.submitting'),
 						waitText = 'Submitting...';
 
-					let review = document.getElementById("review").value
-					let url = "/get_review/" + review
-
-					console.log(url)
+					let url = "/add_review/"
 					$.ajax({   	
-				      type: "GET",
+				      type: "POST",
 				      url: url,
+					  data: {
+						  'review' : document.getElementById("review").placeholder,
+						  'prediction': document.getElementById("prediction_actual").value
+					  },
 				      beforeSend: function() { 
 				      	$submit.css('display', 'block').text(waitText);
 				      },
@@ -49,8 +50,6 @@
 		               		$('#contactForm').fadeIn();
 		               	}, 1000);
 						   $('#form-message-success').text(msg)
-						   
-						    window.open("/retrain_form/"+review+"/"+msg)
 				            setTimeout(function(){
 				               $('#form-message-success').fadeIn();   
 		               	}, 1400);
