@@ -33,7 +33,6 @@
 					var $submit = $('.submitting'),
 						waitText = 'Submitting...';
 					let url = "/get_review/" + document.getElementById("review").value
-					console.log(url)
 					$.ajax({   	
 				      type: "GET",
 				      url: url,
