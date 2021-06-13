@@ -1,5 +1,4 @@
 from firebase_admin.ml import update_model
-from nltk import tokenize
 from nltk.corpus import stopwords
 
 import string
@@ -18,6 +17,7 @@ from keras.models import *
 import pickle
 
 from .firebase_upload import *
+
 
 # load model
 def load_model(model_name):
@@ -46,7 +46,16 @@ def clean_doc(doc):
     tokens = [word for word in tokens if word.isalpha()]
     
     # filter out the stop words
-    stop_words = set(stopwords.words("english"))
+    #stop_words = set(stopwords.words("english"))
+    
+    #To save in file
+    # with open('StopWords.txt','wb') as f:
+    #     pickle.dump(stop_words, f)
+
+    #To read it again from file
+    with open('StopWords.txt','rb') as f:
+        stop_words = pickle.load(f)
+
     tokens = [w for w in tokens if not w in stop_words]
 
     # filter out short tokens
