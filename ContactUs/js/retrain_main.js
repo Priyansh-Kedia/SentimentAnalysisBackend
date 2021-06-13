@@ -8,23 +8,9 @@
 		if ($('#contactForm').length > 0 ) {
 			$( "#contactForm" ).validate( {
 				rules: {
-					// name: "required",
-					// subject: "required",
-					// email: {
-					// 	required: true,
-					// 	email: true
-					// },
-					// message: {
-					// 	required: true,
-					// 	minlength: 5
-					// }
 					review: "required"
 				},
 				messages: {
-					// name: "Please enter your name",
-					// subject: "Please enter your subject",
-					// email: "Please enter a valid email address",
-					// message: "Please enter a message"
 					review: "Please enter a review"
 				},
 				/* submit via ajax */

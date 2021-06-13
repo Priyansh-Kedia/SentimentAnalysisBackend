@@ -147,19 +147,6 @@ import pickle
 with open('tokenizer.pickle', 'wb') as handle:
     pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
-# encode the training data set
-# mode: one of "binary", "count", "tfidf", "freq".
-# if mode == 'count':
-#    x[i][j] = c
-#    elif mode == 'freq':
-#    x[i][j] = c / len(seq)
-#    elif mode == 'binary':
-#       x[i][j] = 1
-#    elif mode == 'tfidf':
-#       tf = 1 + np.log(c)
-#       idf = np.log(1 + self.document_count /
-#                   (1 + self.index_docs.get(j, 0)))
-#       x[i][j] = tf * idf
 XTrain = tokenizer.texts_to_matrix(docs, mode='freq')
 ytrain = array([0 for _ in range(900)] + [1 for _ in range(900)])
 print(XTrain.shape)
