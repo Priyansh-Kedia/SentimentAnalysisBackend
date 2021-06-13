@@ -37,7 +37,7 @@ async def get_prediction_page(request: Request, review: str, prediction: str):
 @app.post("/add_review/")
 async def add_review(background_tasks: BackgroundTasks, review: Review = Body(...)):
     background_tasks.add_task(retrain_model, review)
-    return "Thank you for feedback, model retrained"
+    return "Thank you for your feedback, model has been retrained."
 
 @app.get("/get_review/{review}")
 async def get_review(review: str):
