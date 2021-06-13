@@ -1,5 +1,4 @@
 from firebase_admin.ml import update_model
-from nltk.corpus import stopwords
 
 import string
 from os import listdir
@@ -45,14 +44,7 @@ def clean_doc(doc):
     # remove the tokens which are not alphabetic
     tokens = [word for word in tokens if word.isalpha()]
     
-    # filter out the stop words
-    #stop_words = set(stopwords.words("english"))
-    
-    #To save in file
-    # with open('StopWords.txt','wb') as f:
-    #     pickle.dump(stop_words, f)
-
-    #To read it again from file
+    #To read stopwords saved in txt file instead of using nltk.corpus
     with open('StopWords.txt','rb') as f:
         stop_words = pickle.load(f)
 
