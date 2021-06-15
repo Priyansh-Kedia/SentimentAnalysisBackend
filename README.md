@@ -32,7 +32,9 @@ The updated model is then passed to upload_model(model) present in firebase_uplo
 ![](https://i.imgur.com/cnaXAEC.png)
 
 
-### [Star](https://github.com/Priyansh-Kedia/SentimentAnalysisBackend/stargazers) this repo if you like it. 
+### Found this useful? :heart:
+
+Support it by joining [stargazers](https://github.com/Priyansh-Kedia/SentimentAnalysisBackend/stargazers) for this repository. :star2:
 
 
 ### The template was provided by [ColorLib](https://colorlib.com/wp/templates/)
