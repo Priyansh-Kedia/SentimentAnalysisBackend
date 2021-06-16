@@ -25,11 +25,12 @@
 					$.ajax({   	
 				      type: "POST",
 				      url: url,
+					  contentType: "application/json",
+       				  dataType: "json",
 					  data: JSON.stringify({
 						  'review' : document.getElementById("review").placeholder,
 						  'prediction': parseInt(document.getElementById("prediction_actual").value)
 					  }),
-					  dataType: 'json',
 				      beforeSend: function() { 
 				      	$submit.css('display', 'block').text(waitText);
 				      },
