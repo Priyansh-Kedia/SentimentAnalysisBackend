@@ -4,3 +4,4 @@
 
 *.css linguist-detectable=false
 *.php linguist-detectable=false
+*.pb linguist-detectable=false
