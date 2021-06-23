@@ -1,4 +1,3 @@
-static/* linguist-vendored
-
-ContactUs/css linguist-vendored
-ContactUs/scss linguist-vendored
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+*.scss linguist-detectable=false
