@@ -3,5 +3,7 @@
 *.scss linguist-detectable=false
 
 *.css linguist-detectable=false
+
 *.php linguist-detectable=false
+
 *.pb linguist-detectable=false
